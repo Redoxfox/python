@@ -1,3 +1,4 @@
+
 filas = int(input("Escriba el numero de filas de la matrix: "))
 columnas = int(input("Escriba el numero de filas de la matrix: "))
 
@@ -7,26 +8,15 @@ class matrix:
             self.datos = []
             self.vector = []
             self.vector = [0]*columnas
+            self.InicialPivote = [0]*columnas
+            self.VerctorPivote = [0]*columnas
+
             # print(self.vector)
 
             for i in range(filas):
                 self.datos.append([0]*columnas)
-                # print(self.datos)
+                # print(self.datos)    
 
-
-
-        def CambioPivote (self, filas, columnas, fillpivote, *matrx):
-            VectorIntercambio = [ ]
-            VectorIntercambio = [0]*columnas
-            for i in range(filas):
-                NuevoPiv = matrx[i][fillpivote]
-                if NuevoPiv != 0:
-                    for k in range(columnas):
-                        VectorIntercambio[k] = matrx[i][k]
-            return  VectorIntercambio            
-                        
-
-                   
 
 
         def MostrarMatrix(self, filas, columnas):
@@ -38,17 +28,27 @@ class matrix:
                     b = columnas-1
                     k = 0
                     piv = 0
-
+                    
             for i in range(filas):
                 ValorIndice = self.datos[i][i]
                 if ValorIndice == 0 :
-                    Cambio=self.CambioPivote(filas, columnas, i, self.datos)
-                    print (Cambio) 
+                    for  s in range(filas):
+                         NuevoPiv = self.datos[s][i]
+                         if NuevoPiv != 0 and s > i :
+                            Cambio=s 
+
+                    for x in range(columnas):
+                        self.InicialPivote[x] = self.datos[i][x]
+                        self.VerctorPivote[x] = self.datos[Cambio][x]
+                        self.datos[Cambio][x] = self.InicialPivote[x]
+                        self.datos[i][x] = self.VerctorPivote[x]
+                    
+                    
                 piv = 1/self.datos[i][i]
                 for k in range(columnas):
                     self.vector[k] = self.datos[i][k]*piv
                     self.datos[i][k] = self.vector[k]
-                    print (str(self.datos[i][k])+ '  ' + str(i)+','+str(k) + 'pivote' + '\n')
+                    
                 
                 for j in range(filas):   
                      aux = self.datos[j][i]
@@ -56,19 +56,15 @@ class matrix:
 
                         for l in range(columnas):
                             self.datos[j][l] =-aux*self.vector[l]+self.datos[j][l]
-                            print (str(aux)+ '  ' + str(j)+','+str(l) + 'Ceros' + '\n')
+                            # print (str(aux)+ '  ' + str(j)+','+str(l) + 'Ceros' + '\n')
 
             # k += 1
 
             for k in range(filas):
-                for j in range(columnas):
-                    a += str(self.datos[k][j]) + " "
+                a = str(self.datos[k][filas]) + " "
+                print ('Valor de ' + 'X' + str(k + 1) + ' es = '+ str(a) + '\n')
                     #  print (j)
-                if j == b:
-                   # print (a + '\n')
-                    print (self.datos)
-                a = ""
-                   
+   
 
 
 mimatrix = matrix()
