@@ -27,6 +27,6 @@ while(parar == False):
 if(primo==True):
     print("El numero no es primo es divisible entre %s", contador-1)
 else:
-    print("El munero es primo")
+    print("El numero es primo")
 
 
